@@ -19,11 +19,11 @@ jobs:
     - uses: ./actions/xl2resx-action
     - run: ls
     - run: mkdir -p '${{ github.workspace }}/output'
-    - run: copy 'output/' '${{ github.workspace }}/output'
+    - run: cp -r './output' '${{ github.workspace }}/output'
     - name: Publish Artifact
       uses: actions/upload-artifact@v2
       with:
-        path: ${{ github.workspace }}/Artifacts
+        path: ${{ github.workspace }}/output
         name: ${{ github.run_number }}
     - name: commit
       run: |
