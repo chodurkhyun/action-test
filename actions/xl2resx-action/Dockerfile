@@ -6,8 +6,8 @@ RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 RUN python3 ./get-pip.py
 RUN rm ./get-pip.py
 RUN pip install openpyxl
-RUN mkdir /root/workspace
-RUN mkdir /root/workspace/output
-WORKDIR /root/workspace
+RUN mkdir /github/workspace
+RUN mkdir /github/workspace/output
+WORKDIR /github/workspace
 # ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["python3", "xl2resx.py"]
