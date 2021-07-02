@@ -17,9 +17,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./actions/xl2resx-action
-    - uses: actions/download-artifact@v2
+    - run: ls
+    - run: |
+      git config --local user.email "localization[bot]@user.noreply.github.com"
+      git config --local user.name "localization[bot]"
+      git commit -m "Updates localization changes" -a
+    - name: push
+      uses: ad-m/github-push-action@master
       with:
-        path: ./
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
+
     
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
