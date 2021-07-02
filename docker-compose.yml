@@ -3,5 +3,5 @@ services:
     xl2resx_container:
         image: 'xl2resx'
         volumes: 
-            - /mnt/c/dev/xl2resx:/root/workspace
+            - /:/root/workspace
     
