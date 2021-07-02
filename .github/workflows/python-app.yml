@@ -18,6 +18,13 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./actions/xl2resx-action
     - run: ls
+    - run: mkdir -p '${{ github.workspace }}/output'
+    - run: copy 'output/' '${{ github.workspace }}/output'
+    - name: Publish Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        path: ${{ github.workspace }}/Artifacts
+        name: ${{ github.run_number }}
     - name: commit
       run: |
         git config --local user.email "localization[bot]@user.noreply.github.com"
