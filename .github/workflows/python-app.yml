@@ -32,5 +32,5 @@ jobs:
         docker ps -a
     - name: Make resx
       run: |
-        docker exec xl2resx_container xl2resx.py
+        docker exec xl2resx_container python xl2resx.py
         
