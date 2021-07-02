@@ -7,6 +7,6 @@ RUN python3 ./get-pip.py
 RUN rm ./get-pip.py
 RUN pip install openpyxl
 RUN mkdir /root/workspace
-RUN mkdir /root/workspace/output
+RUN mkdir /root/workspace/output_
 WORKDIR /root/workspace
 ENTRYPOINT ["tail", "-f", "/dev/null"]
