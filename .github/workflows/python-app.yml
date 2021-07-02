@@ -25,10 +25,11 @@ jobs:
         python -m pip install --upgrade pip
         pip install openpyxl 
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Install mono-devel
+    - name: docker
       run: |
-        apt install mono-delvel
+        docker-compose up -d
+        docker ps -a
     - name: Make resx
       run: |
-        python xl2resx.py
+        docker exec xl2resx xl2resx.py
         
