@@ -3,8 +3,8 @@ import subprocess
 import os
 from openpyxl import load_workbook 
 
-if not os.path.exists('./output'):
-    os.mkdir('./output')
+if not os.path.exists('./output_'):
+    os.mkdir('./output_')
 
 wb = load_workbook(filename='./test.xlsx')
 
@@ -27,6 +27,6 @@ for ws in wb:
         with open('tmp.txt', 'w') as f:
             f.writelines([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
 
-        subprocess.run(['resgen', 'tmp.txt', f'/root/workspace/output/{ws.title}.{k}.resx'])
+        subprocess.run(['resgen', 'tmp.txt', f'/root/workspace/output_/{ws.title}.{k}.resx'])
 
 os.remove('tmp.txt')
