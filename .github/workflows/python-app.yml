@@ -15,8 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: chodurkhyun/action-test/xl2resx-action@main
     - uses: actions/checkout@v2
+    - uses: chodurkhyun/action-test/xl2resx-action@main
+    
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
