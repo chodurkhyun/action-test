@@ -33,12 +33,7 @@ jobs:
         docker exec xl2resx_container python3 xl2resx.py
         ls
     - run: git status
-
-    - name: Publish Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        path: ${{ github.workspace }}/output
-        name: ${{ github.run_number }}
+    - run: mv ./output_/* ./output/
     - name: commit
       run: |
         git config --local user.email "localization[bot]@user.noreply.github.com"
