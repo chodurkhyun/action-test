@@ -19,7 +19,7 @@ jobs:
     - uses: ./actions/xl2resx-action
     - run: ls
     - run: pwd
-    - run: ls /output
+    - run: ls ./output
 
     - name: Publish Artifact
       uses: actions/upload-artifact@v2
