@@ -32,6 +32,7 @@ jobs:
       run: |
         docker exec xl2resx_container python3 xl2resx.py
         ls
+    - run: git status
 
     - name: Publish Artifact
       uses: actions/upload-artifact@v2
