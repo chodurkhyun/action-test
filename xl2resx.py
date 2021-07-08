@@ -1,32 +1,25 @@
 from collections import OrderedDict
 import subprocess
 import os
+from shutil import copyfile
 from openpyxl import load_workbook 
 
-if not os.path.exists('./output_'):
-    os.mkdir('./output_')
 
-wb = load_workbook(filename='./test.xlsx')
+def convert_xlsx_to_resx(filename):
+    for ws in load_workbook(filename):
+        res_dict = OrderedDict({c[0]: c[1:] for c in ws.iter_cols(values_only=True)})
+        keys = list(res_dict.keys())
 
-for ws in wb:
-    print(ws.title)
+        for k in keys[1:]:
+            with open('tmp.txt', 'w') as f:
+                f.writelines([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
 
-    names = [x[0] for x in ws.iter_rows(min_col=1, max_col=1, min_row=2, values_only=True)]
-    print(names)
+            subprocess.run(['resgen', 'tmp.txt', f'/root/workspace/output_/{ws.title}.{k}.resx'])
 
-    res_dict = OrderedDict()
-    for c in ws.iter_cols(values_only=True):
-        res_dict[c[0]] = c[1:]
+        copyfile(f'/root/workspace/output_/{ws.title}.{keys[1]}.resx', f'/root/workspace/output_/{ws.title}.resx')
 
-    print(res_dict)
+    os.remove('tmp.txt')
 
-    print(res_dict.keys())
 
-    for k in list(res_dict.keys())[1:]:
-        print([f'{n}={v}' for n, v in zip(res_dict['name'], res_dict[k])])
-        with open('tmp.txt', 'w') as f:
-            f.writelines([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
-
-        subprocess.run(['resgen', 'tmp.txt', f'/root/workspace/output_/{ws.title}.{k}.resx'])
-
-os.remove('tmp.txt')
+if __name__ == '__main__':
+    convert_xlsx_to_resx('test.xlsx')
