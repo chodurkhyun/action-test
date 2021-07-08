@@ -11,13 +11,12 @@ def convert_xlsx_to_resx(filename):
         keys = list(res_dict.keys())
 
         for k in keys[1:]:
-            print([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
             with open('tmp.txt', 'w') as f:
                 f.writelines([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
 
             subprocess.run(['resgen', 'tmp.txt', f'/root/workspace/output_/{ws.title}.{k}.resx'])
 
-        #copyfile(f'/root/workspace/output_/{ws.title}.{keys[1]}.resx', f'/root/workspace/output_/{ws.title}.resx')
+        copyfile(f'/root/workspace/output_/{ws.title}.{keys[1]}.resx', f'/root/workspace/output_/{ws.title}.resx')
 
     os.remove('tmp.txt')
 
