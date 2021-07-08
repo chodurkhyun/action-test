@@ -11,6 +11,7 @@ def convert_xlsx_to_resx(filename):
         keys = list(res_dict.keys())
 
         for k in keys[1:]:
+            print([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
             with open('tmp.txt', 'w') as f:
                 f.writelines([f'{n}={v}\n' for n, v in zip(res_dict['name'], res_dict[k])])
 
