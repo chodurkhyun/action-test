@@ -31,6 +31,7 @@ jobs:
     - name: Make resx
       run: |
         ls
+        mkdir output_
         echo '~'
         docker exec xl2resx_container python3 xl2resx.py
         ls
