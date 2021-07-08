@@ -16,7 +16,7 @@ def convert_xlsx_to_resx(filename):
 
             subprocess.run(['resgen', 'tmp.txt', f'/root/workspace/output_/{ws.title}.{k}.resx'])
 
-        copyfile(f'/root/workspace/output_/{ws.title}.{keys[1]}.resx', f'/root/workspace/output_/{ws.title}.resx')
+        #copyfile(f'/root/workspace/output_/{ws.title}.{keys[1]}.resx', f'/root/workspace/output_/{ws.title}.resx')
 
     os.remove('tmp.txt')
 
