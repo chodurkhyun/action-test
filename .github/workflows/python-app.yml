@@ -30,7 +30,7 @@ jobs:
         docker ps -a
     - name: Make resx
       run: |
-        docker exec xl2resx_container sudo python3 xl2resx.py
+        docker exec xl2resx_container python3 xl2resx.py
         ls
     - run: git status
     - run: sudo mv ./output_/* ./output/
