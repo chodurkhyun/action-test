@@ -45,7 +45,7 @@ jobs:
 
     - name: commit
       run: |
-        sudo rm -r ./out
+        sudo rm -r ./localization_tool/out
         git config --local user.email "dev@cogaplex.com"
         git config --local user.name "CoPickDev[bot]"
         git add .
