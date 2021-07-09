@@ -14,9 +14,13 @@ jobs:
     
     - name: docker
       run: |
+        cd /.github/workflows
+        ls
         mkdir out
         docker build . -t xl2resx
         docker-compose up -d
+        cd /
+        ls
 
     - name: make the resources of test
       if: hashFiles('test.xlsx') != ''
@@ -44,12 +48,12 @@ jobs:
 
     - name: commit
       run: |
+        sudo rm -r ./out
         git config --local user.email "dev@cogaplex.com"
         git config --local user.name "CoPickDev[bot]"
         git add .
         git status
         git commit -m "Updates localization changes"
-        sudo rm -r ./out
 
     - name: push
       uses: ad-m/github-push-action@master
