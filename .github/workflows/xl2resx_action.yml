@@ -18,11 +18,11 @@ jobs:
         docker build . -t xl2resx
         docker-compose up -d
 
-    #- name: Make resx
-    #  run: |
-    #    ls
-    #    docker exec xl2resx_container python3 xl2resx.py
-    #    ls
+    - name: Make resx
+      run: |
+        ls
+        docker exec xl2resx_container python3 xl2resx.py
+        ls
     - run: git status
     - run: sudo mv ./out/* ./output/
 
