@@ -8,6 +8,4 @@ RUN rm ./get-pip.py
 RUN pip install openpyxl
 RUN mkdir -p /root/workspace/out
 WORKDIR /root/workspace
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
-ENTRYPOINT ["python3"]
-CMD ["xl2resx.py"]
+ENTRYPOINT ["tail", "-f", "/dev/null"]
