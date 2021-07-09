@@ -24,10 +24,13 @@ jobs:
       #  docker exec xl2resx_container python3 xl2resx.py
       #  ls
     - run: git status
-    - run: sudo mv ./out/* ./$FineLocalizerPath/
+    - run: |
+        sudo mv ./out/* ./$FineLocalizerPath/
+        ls ./out/${FineLocalizerPath}
+        sudo mv ./out/${CommonUtilsPath}*.resx ./$Sheet1/Lang/
       env:
         FineLocalizerPath: output
-        CommonUtilsPath: CommonUtils
+        CommonUtilsPath: Sheet1
         CalibrationToolPath: CalibrationTool
 
     - name: commit
