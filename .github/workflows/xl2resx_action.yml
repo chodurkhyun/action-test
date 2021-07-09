@@ -21,7 +21,7 @@ jobs:
         docker ps 
 
     - name: move the resources of test
-      if: hasFiles('test.xlsx') != ''
+      if: hashFiles('test.xlsx') != ''
       run: |
         ls ./out
         sudo mv ./out/*.resx ./test/Lang/
