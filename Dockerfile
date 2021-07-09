@@ -8,4 +8,4 @@ RUN rm ./get-pip.py
 RUN pip install openpyxl
 RUN mkdir -p /root/workspace/out
 WORKDIR /root/workspace
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+# ENTRYPOINT ["tail", "-f", "/dev/null"]
