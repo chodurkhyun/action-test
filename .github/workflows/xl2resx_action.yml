@@ -15,15 +15,19 @@ jobs:
     - name: docker
       run: |
         mkdir out
+        mkdir -p ./test/Lang
         docker build . -t xl2resx
         docker-compose up
+        docker ps 
 
-    - name: Make resx
+    - name: move the resources of test
+      if: hasFiles('test.xlsx') != ''
       run: |
-        ls
-      #  docker exec xl2resx_container python3 xl2resx.py
-      #  ls
-    - run: git status
+        ls ./out
+        sudo mv ./out/*.resx ./test/Lang/
+        sudo rm ./out/*.resx
+        ls ./out
+
     - run: |
         sudo mv ./out/* ./$FineLocalizerPath/
         ls ./out/${FineLocalizerPath}
