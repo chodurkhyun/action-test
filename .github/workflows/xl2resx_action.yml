@@ -49,6 +49,7 @@ jobs:
         git add .
         git status
         git commit -m "Updates localization changes"
+        sudo rm ./out
 
     - name: push
       uses: ad-m/github-push-action@master
