@@ -16,7 +16,7 @@ jobs:
       run: |
         mkdir out
         docker build . -t xl2resx
-        docker-compose up -d
+        docker-compose up
 
     - name: Make resx
       run: |
