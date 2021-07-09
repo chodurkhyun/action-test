@@ -5,5 +5,5 @@ services:
         container_name: 'xl2resx_container'
         volumes: 
             - ./:/root/workspace
-        entrypoint: python3 xl2resx.py
+        
     
