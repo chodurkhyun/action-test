@@ -14,12 +14,12 @@ jobs:
     
     - name: docker
       run: |
-        cd /.github/workflows
+        cd ./localization_tool
         ls
         mkdir out
         docker build . -t xl2resx
         docker-compose up -d
-        cd /
+        cd ./
         ls
 
     - name: make the resources of test
