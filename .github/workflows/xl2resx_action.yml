@@ -3,8 +3,8 @@ name: xlsx to resx
 on:
   push:
     branches: main
-    #paths:
-    #  - '**.xlsx'
+    paths:
+      - './localization_tool/**.xlsx'
 
 jobs:
   build:
@@ -26,22 +26,22 @@ jobs:
         sudo mv ./localization_tool/out/*.resx ./output/
 
     - name: make the resources of FineLocalizer
-      if: hashFiles('FineLocalizer.xlsx') != ''
+      if: hashFiles('./localization_tool/FineLocalizer.xlsx') != ''
       run: |
         docker exec xl2resx_container python3 xl2resx.py FineLocalizer.xlsx
-        sudo mv ./out/*.resx ./FineLocalizer/Lang/
+        sudo mv ./localization_tool/out/*.resx ./FineLocalizer/Lang/
 
     - name: make the resources of CalibrationTool
-      if: hashFiles('CalibrationTool.xlsx') != ''
+      if: hashFiles('./localization_tool/CalibrationTool.xlsx') != ''
       run: |
         docker exec xl2resx_container python3 xl2resx.py CalibrationTool.xlsx
-        sudo mv ./out/*.resx ./CalibrationTool/Lang/
+        sudo mv ./localization_tool/out/*.resx ./CalibrationTool/Lang/
 
     - name: make the resources of CommonUtils
-      if: hashFiles('CommonUtils.xlsx') != ''
+      if: hashFiles('./localization_tool/CommonUtils.xlsx') != ''
       run: |
         docker exec xl2resx_container python3 xl2resx.py CommonUtils.xlsx
-        sudo mv ./out/*.resx ./CommonUtils/Lang/
+        sudo mv ./localization_tool/out/*.resx ./CommonUtils/Lang/
 
     - name: commit
       run: |
