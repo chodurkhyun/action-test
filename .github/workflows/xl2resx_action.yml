@@ -15,18 +15,15 @@ jobs:
     - name: docker
       run: |
         cd ./localization_tool
-        ls
         mkdir out
         docker build . -t xl2resx
         docker-compose up -d
-        cd ./
-        ls
 
     - name: make the resources of test
       if: hashFiles('test.xlsx') != ''
       run: |
         docker exec xl2resx_container python3 xl2resx.py test.xlsx
-        sudo mv ./out/*.resx ./output/
+        sudo mv ./out/*.resx ../output/
 
     - name: make the resources of FineLocalizer
       if: hashFiles('FineLocalizer.xlsx') != ''
