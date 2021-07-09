@@ -1,0 +1,41 @@
+name: xlsx to resx
+
+on:
+  push:
+    branches: main
+    #paths:
+    #  - '**.xlsx'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: docker
+      run: |
+        mkdir out
+        docker build . -t xl2resx
+        docker-compose up -d
+
+    - name: Make resx
+      run: |
+        ls
+        docker exec xl2resx_container python3 xl2resx.py
+        ls
+    - run: git status
+    - run: sudo mv ./out/* ./output/
+
+    - name: commit
+      run: |
+        git config --local user.email "dev@cogaplex.com"
+        git config --local user.name "CoPickDev[bot]"
+        git add ./output
+        git status
+        git commit -m "Updates localization changes"
+
+    - name: push
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
