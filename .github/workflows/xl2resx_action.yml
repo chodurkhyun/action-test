@@ -16,7 +16,6 @@ jobs:
       run: |
         cd ./localization_tool
         mkdir out
-        docker build . -t xl2resx
         docker-compose up -d
 
     - name: make the resources of test
