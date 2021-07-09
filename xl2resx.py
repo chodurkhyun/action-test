@@ -1,11 +1,16 @@
 from collections import OrderedDict
 import subprocess
+import sys
 import os
 from shutil import copyfile
 from openpyxl import load_workbook 
 
 
 def convert_xlsx_to_resx(filename):
+    if not os.path.exists(filename):
+        print('the input file does not exist')
+        return
+
     for ws in load_workbook(filename):
         res_dict = OrderedDict({c[0]: c[1:] for c in ws.iter_cols(values_only=True)})
         keys = list(res_dict.keys())
@@ -22,4 +27,7 @@ def convert_xlsx_to_resx(filename):
 
 
 if __name__ == '__main__':
-    convert_xlsx_to_resx('test.xlsx')
+    if len(sys.argv) > 1:
+        convert_xlsx_to_resx(sys.argv[1])
+    else:
+        print("Usage: python3 xl2resx.py FILENAME.xlsx")

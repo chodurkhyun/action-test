@@ -15,33 +15,38 @@ jobs:
     - name: docker
       run: |
         mkdir out
-        mkdir -p ./test/Lang
         docker build . -t xl2resx
-        docker-compose up
-        docker ps 
+        docker-compose up -d
 
-    - name: move the resources of test
+    - name: make the resources of test
       if: hashFiles('test.xlsx') != ''
       run: |
-        ls ./out
-        sudo mv ./out/*.resx ./test/Lang/
-        sudo rm ./out/*.resx
-        ls ./out
+        docker exec xl2resx_container python3 xl2resx.py test.xlsx
+        sudo mv ./out/*.resx ./output/
 
-    - run: |
-        sudo mv ./out/* ./$FineLocalizerPath/
-        ls ./out/${FineLocalizerPath}
-        sudo mv ./out/${CommonUtilsPath}*.resx ./$Sheet1/Lang/
-      env:
-        FineLocalizerPath: output
-        CommonUtilsPath: Sheet1
-        CalibrationToolPath: CalibrationTool
+    - name: make the resources of FineLocalizer
+      if: hashFiles('FineLocalizer.xlsx') != ''
+      run: |
+        docker exec xl2resx_container python3 xl2resx.py FineLocalizer.xlsx
+        sudo mv ./out/*.resx ./FineLocalizer/Lang/
+
+    - name: make the resources of CalibrationTool
+      if: hashFiles('CalibrationTool.xlsx') != ''
+      run: |
+        docker exec xl2resx_container python3 xl2resx.py CalibrationTool.xlsx
+        sudo mv ./out/*.resx ./CalibrationTool/Lang/
+
+    - name: make the resources of CommonUtils
+      if: hashFiles('CommonUtils.xlsx') != ''
+      run: |
+        docker exec xl2resx_container python3 xl2resx.py CommonUtils.xlsx
+        sudo mv ./out/*.resx ./CommonUtils/Lang/
 
     - name: commit
       run: |
         git config --local user.email "dev@cogaplex.com"
         git config --local user.name "CoPickDev[bot]"
-        git add ./output
+        git add .
         git status
         git commit -m "Updates localization changes"
 
